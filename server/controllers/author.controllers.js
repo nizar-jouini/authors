@@ -6,3 +6,10 @@ module.exports.createAuthor = (req, res) => {
         .then(author => res.json(author))
         .catch(err => console.log(err))
 }
+
+module.exports.getAllAuthors = (req, res) => {
+    // Mongoose's "find" method is run using our author model to get all authors from our db's authors collection
+    Author.find()
+        .then(author => res.json(author))
+        .catch(err => console.log(err))
+}

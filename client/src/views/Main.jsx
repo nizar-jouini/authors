@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AuthorsForm from '../components/AuthorsForm'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const Main = () => {
-    const [authors, setAuthors] = useState([])
+const Main = (props) => {
+    const {authors, setAuthors} = props
 
     const createAuthor = (authorParams) => {
         // make a post request to create a new author
