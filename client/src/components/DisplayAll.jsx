@@ -13,6 +13,14 @@ const DisplayAll = (props) => {
       })
   })
 
+  const deleteOneAuthor = (authorId) => {
+    axios.delete("http://localhost:8000/api/authors/" + authorId)
+      .then(res => {
+        setAuthors(authors.filter(author => author._id !== authorId))
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className='container w-50'>
         <Link to={'/new'}>Add an Author</Link>
@@ -31,7 +39,7 @@ const DisplayAll = (props) => {
                   <td className='text-start'>{ author.name }</td>
                   <td className='border'>
                   <button type="submit" className="btn btn-primary me-3">Edit</button>
-                  <button type="submit" className="btn btn-danger">Delete</button>
+                  <button type="submit" className="btn btn-danger" onClick={ () => deleteOneAuthor(author._id) }>Delete</button>
                   </td>
                 </tr>
               ))

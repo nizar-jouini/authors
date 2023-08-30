@@ -13,3 +13,9 @@ module.exports.getAllAuthors = (req, res) => {
         .then(author => res.json(author))
         .catch(err => console.log(err))
 }
+
+module.exports.deleteOneAuthor = (req, res) => {
+    Author.deleteOne({_id:req.params.id})
+        .then(deleteConfirmation => res.json(deleteConfirmation))
+        .catch(err => console.log(err))
+}
