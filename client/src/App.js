@@ -1,5 +1,6 @@
 import './App.css';
 import DisplayAll from './components/DisplayAll'
+import UpdateAuthor from './components/UpdateAuthor';
 import { Routes, Route } from 'react-router-dom'
 import Main from './views/Main';
 import { useState } from 'react'
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<DisplayAll authors={authors} setAuthors={setAuthors}/>} />
         <Route path='/new' element={<Main authors={authors} setAuthors={setAuthors} />} />
+        <Route path='/edit/:id' element={<UpdateAuthor />} />
       </Routes>
     </div>
   );

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const DisplayAll = (props) => {
   const { authors, setAuthors } = props
+  const navigate = useNavigate()
 
   useEffect( () => {
     axios.get("http://localhost:8000/api/authors")
@@ -19,6 +20,10 @@ const DisplayAll = (props) => {
         setAuthors(authors.filter(author => author._id !== authorId))
       })
       .catch(err => console.log(err))
+  }
+
+  const onClickEdit = (authorId) => {
+    navigate("/edit/" + authorId)
   }
 
   return (
@@ -38,7 +43,7 @@ const DisplayAll = (props) => {
                 <tr key={i}>
                   <td className='text-start'>{ author.name }</td>
                   <td className='border'>
-                  <button type="submit" className="btn btn-primary me-3">Edit</button>
+                  <button type="submit" className="btn btn-primary me-3" onClick={ () => onClickEdit(author._id) } >Edit</button>
                   <button type="submit" className="btn btn-danger" onClick={ () => deleteOneAuthor(author._id) }>Delete</button>
                   </td>
                 </tr>

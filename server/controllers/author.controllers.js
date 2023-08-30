@@ -14,7 +14,22 @@ module.exports.getAllAuthors = (req, res) => {
         .catch(err => console.log(err))
 }
 
+module.exports.getOneAuthor = (req, res) => {
+    // Mongoose's "findOne" method is run using our author model to find one author from our db's authors collection
+    Author.findOne({_id:req.params.id})
+        .then(author => res.json(author))
+        .catch(err => console.log(err))
+}
+
+module.exports.updateOneAuthor = (req, res) => {
+    // Mongoose's "findOneAndUpdate" method is run using our author model to find and update one author from our db's authors collection
+    Author.findOneAndUpdate({_id:req.params.id}, req.body, {new:true})
+        .then(author => res.json(author))
+        .catch(err => console.log(err))
+}
+
 module.exports.deleteOneAuthor = (req, res) => {
+    // Mongoose's "deleteOne" method is run using our author model to delete one author from our db's authors collection
     Author.deleteOne({_id:req.params.id})
         .then(deleteConfirmation => res.json(deleteConfirmation))
         .catch(err => console.log(err))

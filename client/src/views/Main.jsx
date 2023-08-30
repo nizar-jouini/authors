@@ -1,7 +1,6 @@
 import React from 'react'
 import AuthorsForm from '../components/AuthorsForm'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
 const Main = (props) => {
     const {authors, setAuthors} = props
@@ -22,8 +21,7 @@ const Main = (props) => {
 
   return (
     <div className='container w-50'>
-      <Link to='/'>Home</Link>
-      <AuthorsForm onSubmitProp={createAuthor} intialName=""/>
+      <AuthorsForm onSubmitProp={createAuthor} intialName="" title="Add a new author: "/>
     </div>
   )
 }
