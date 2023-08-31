@@ -6,6 +6,7 @@ import axios from 'axios'
 const UpdateAuthor = (props) => {
     const [ author, setAuthor ] = useState({})
     const [ loaded, setLoaded ] = useState(false)
+    const [errors, setErrors] = useState([])
     const {id} = useParams()
     const navigate = useNavigate()
 
@@ -19,20 +20,23 @@ const UpdateAuthor = (props) => {
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    })
+    }, [id])
 
     const updateOneAuthor = (authorParams) => {
         // send request with id and data to thhis url
         axios.put("http://localhost:8000/api/authors/edit/" + id, authorParams)
             // after successfully sending request we navigate to '/'
             .then(res => navigate('/'))
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                setErrors(err.response.data.errors)
+              })
     }
 
   return (
     <div className='container w-50'>
         {
-            loaded && <AuthorsForm onSubmitProp={ updateOneAuthor } intialName={ author } title="Edit this author " />
+            loaded && <AuthorsForm onSubmitProp={ updateOneAuthor } intialName={ author } title="Edit this author " errors={errors} />
         }
     </div>
   )

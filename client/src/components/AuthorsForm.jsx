@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 const AuthorsForm = (props) => {
-    const { onSubmitProp, intialName, title } = props
+    const { onSubmitProp, intialName, title, errors } = props
     const [name, setName] = useState(intialName)
     const navigate = useNavigate()
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
         onSubmitProp({ name })
-        handleClick()
     }
   
     const handleClick = () => {
@@ -24,6 +23,10 @@ const AuthorsForm = (props) => {
             <div className="mb-3">
                 <label className="form-label fw-bold">Name:</label>
                 <input type="text" className="form-control" value={name} onChange={ (e) => setName(e.target.value) }/>
+                {errors.name ?
+                    <p className='ms-3 text-danger'>* {errors.name.message}</p>
+                    : null
+                }
             </div>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="submit" className="btn btn-primary me-3" onClick={ handleClick } >Cancel</button>
